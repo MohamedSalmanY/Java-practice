@@ -1,0 +1,198 @@
+1) write a java program that prints its  arguments in random order do not make a copy of the argument array. demonstrate how to print out the elements using both streams and the tradational ennhanced for statement.
+
+=======
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
+public class RandomPrint {
+
+    public static void main(String[] args) {
+        // Convert args array to a list
+        List<String> argList = Arrays.asList(args);
+
+        // Shuffle the list
+        Collections.shuffle(argList, new Random());
+
+        // Print the elements using streams
+        System.out.println("Printing using streams:");
+        argList.stream().forEach(System.out::println);
+
+        // Print the elements using traditional enhanced for loop
+        System.out.println("\nPrinting using traditional enhanced for loop:");
+        for (String arg : argList) {
+            System.out.println(arg);
+        }
+    }
+}
+-------------------------------------------------------
+2) write a method that takes a List<String> and applies String.trim to each element.
+
+==========
+import java.util.List;
+
+public class StringTrimmer {
+
+    public static void trimStrings(List<String> stringList) {
+        for (int i = 0; i < stringList.size(); i++) {
+            stringList.set(i, stringList.get(i).trim());
+        }
+    }
+
+    // Example usage
+    public static void main(String[] args) {
+        List<String> stringList = List.of("  Hello ", "  World  ", "  Java  ");
+        
+        System.out.println("Before trimming:");
+        System.out.println(stringList);
+
+        trimStrings(stringList);
+
+        System.out.println("\nAfter trimming:");
+        System.out.println(stringList);
+    }
+}
+
+----------------------------
+3) write a java program to  create a class called shape  with a method called getArea(). create a sub class called rectangle that overrides the getArea() method to calculate the area of rectangle
+
+============
+class Shape {
+    public double getArea() {
+        return 0; // Default implementation for base class
+    }
+}
+
+class Rectangle extends Shape {
+    private double width;
+    private double height;
+
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    @Override
+    public double getArea() {
+        return width * height; // Area of rectangle
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Rectangle rectangle = new Rectangle(5, 10);
+        System.out.println("Area of rectangle: " + rectangle.getArea());
+    }
+}
+
+--------------------------------------
+4) write a java program that creates a class hierarchy for employees of a company .The base class should be Employee with subclass manager, developer and programmer. Each subclass should have properties such as name address salary and job title .implements  method for calculating bonuses , generating performance reports and managing projects
+
+
+=============
+class Employee {
+    private String name;
+    private String address;
+    private double salary;
+    private String jobTitle;
+
+    public Employee(String name, String address, double salary, String jobTitle) {
+        this.name = name;
+        this.address = address;
+        this.salary = salary;
+        this.jobTitle = jobTitle;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public double calculateBonus() {
+        // Base implementation for calculating bonus (can be overridden by subclasses)
+        return 0;
+    }
+
+    public void generatePerformanceReport() {
+        // Base implementation for generating performance report
+        System.out.println("Performance report for " + name);
+        // Actual implementation would generate detailed report
+    }
+
+    public void manageProject() {
+        // Base implementation for managing projects
+        System.out.println(name + " is managing the project.");
+        // Actual implementation would involve project management tasks
+    }
+}
+
+class Manager extends Employee {
+    public Manager(String name, String address, double salary, String jobTitle) {
+        super(name, address, salary, jobTitle);
+    }
+
+    @Override
+    public double calculateBonus() {
+        // Custom implementation for calculating bonus for manager
+        return getSalary() * 0.1; // 10% of salary
+    }
+}
+
+class Developer extends Employee {
+    public Developer(String name, String address, double salary, String jobTitle) {
+        super(name, address, salary, jobTitle);
+    }
+
+    @Override
+    public double calculateBonus() {
+        // Custom implementation for calculating bonus for developer
+        return getSalary() * 0.05; // 5% of salary
+    }
+}
+
+class Programmer extends Employee {
+    public Programmer(String name, String address, double salary, String jobTitle) {
+        super(name, address, salary, jobTitle);
+    }
+
+    @Override
+    public double calculateBonus() {
+        // Custom implementation for calculating bonus for programmer
+        return getSalary() * 0.03; // 3% of salary
+    }
+}
+
+public class Company {
+    public static void main(String[] args) {
+        Manager manager = new Manager("John Doe", "123 Main St", 60000, "Manager");
+        Developer developer = new Developer("Alice Smith", "456 Oak St", 50000, "Developer");
+        Programmer programmer = new Programmer("Bob Johnson", "789 Elm St", 40000, "Programmer");
+
+        // Calculate and print bonuses for each employee
+        System.out.println("Bonus for Manager: $" + manager.calculateBonus());
+        System.out.println("Bonus for Developer: $" + developer.calculateBonus());
+        System.out.println("Bonus for Programmer: $" + programmer.calculateBonus());
+
+        // Generate performance report for each employee
+        manager.generatePerformanceReport();
+        developer.generatePerformanceReport();
+        programmer.generatePerformanceReport();
+
+        // Manage projects
+        manager.manageProject();
+        developer.manageProject();
+        programmer.manageProject();
+    }
+}
