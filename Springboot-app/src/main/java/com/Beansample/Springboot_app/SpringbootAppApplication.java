@@ -14,7 +14,7 @@ public class SpringbootAppApplication {
 
 	public static void main(String[] args) {
 		var context = SpringApplication.run(SpringbootAppApplication.class, args);
-		PizzaController pizzaController = (PizzaController) context.getBean("pizzademo");
+		PizzaController pizzaController = context.getBean(PizzaController.class);
 		System.out.println(pizzaController.getPizza());
 
 	}
